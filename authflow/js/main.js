@@ -1,5 +1,9 @@
 (function(window, $) {
 
+    if(window!==window.top){
+        this.close();
+    }
+
     var app_id = 'fa47b31638ea4c86b1d48ad000a3c710';
     var redirect_uri = 'http://yir.github.io/authflow/index.html';
 
@@ -8,8 +12,8 @@
 
     var userProfileTemplate = Handlebars.compile($('#user-profile-template').html()),
         userProfilePlaceholder = $('#user-profile'),
-        oauthTemplate = Handlebars.compile($('#oauth-template').html()),
-        oauthPlaceholder = $('#oauth'),
+        playlistsTemplate = Handlebars.compile($('#playlists-template').html()),
+        playlistsPlaceholder = $('#playlists');
         params = getHashParams(),
         access_token = params.access_token,
         state = params.state,
@@ -56,10 +60,23 @@
                     'Authorization': 'Bearer ' + access_token
                 },
                 success: function(response) {
-                    userProfilePlaceholder.innerHTML = userProfileTemplate(response);
+                    userProfilePlaceholder.html(userProfileTemplate(response));
 
                     $('#login').hide();
                     $('#loggedin').show();
+
+
+                    // get user's playlists
+                    $.ajax({
+                        url: 'https://api.spotify.com/v1/users/'+user_id+'/playlists',
+                        headers: {
+                            'Authorization': 'Bearer ' + access_token
+                        },
+                        success: function(response) {
+                            playlistsPlaceholder.html(playlistsTemplate(response));
+                        }
+                    });
+
                 }
             });
         } else {
@@ -81,7 +98,18 @@
             url += '&redirect_uri=' + encodeURIComponent(redirect_uri);
             url += '&state=' + encodeURIComponent(state);
 
-            window.location = url;
+            popUp(url, "Spotify", 350, 500);
         });
+
+
+        function popUp(url, title, w, h) {
+            wLeft = window.screenLeft ? window.screenLeft : window.screenX;
+            wTop = window.screenTop ? window.screenTop : window.screenY;
+
+            var left = wLeft + (window.innerWidth / 2) - (w / 2);
+            var top = wTop + (window.innerHeight / 2) - (h / 2);
+            return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+        }
+
     }
 })(window, window.jQuery);
