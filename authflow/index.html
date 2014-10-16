@@ -17,6 +17,8 @@
         </div>
         <div id="oauth">
         </div>
+        <div id="playlists">
+        </div>
     </div>
 </div>
 
@@ -48,6 +50,19 @@
     <dl class="dl-horizontal">
         <dt>Access token</dt><dd class="text-overflow">{{access_token}}</dd>
     </dl>
+</script>
+
+
+<script id="playlists-template" type="text/x-handlebars-template">
+    {{#each items}}
+    <div class="user-playlist" style="overflow:hidden">
+        <img src="{{images.0.url}}" style="float:left;">
+        <h4>{{name}}</h4>
+        <div>Public? {{public}}</div>
+        <div>Collaborative? {{collaborative}}</div>
+        <div>{{tracks.total}} tracks</div>
+    </div>
+    {{/each}}
 </script>
 
 
