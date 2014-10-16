@@ -1,11 +1,12 @@
 (function(window, $) {
 
     if(window.opener && window.opener !== window.top){
-        $(window).trigger("auth", getHashParams());
+        $(window.opener).trigger("auth", getHashParams());
         this.close();
     }
 
     $(window).on('auth', function(e, params){
+        console.log('auth', params);
         var state = params.state,
             storedState = localStorage.getItem(stateKey);
 
