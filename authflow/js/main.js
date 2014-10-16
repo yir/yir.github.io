@@ -82,6 +82,6 @@
             url += '&state=' + encodeURIComponent(state);
 
             window.location = url;
-        }, false);
+        });
     }
 })(window, window.jQuery);
