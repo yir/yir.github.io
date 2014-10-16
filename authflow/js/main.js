@@ -1,8 +1,44 @@
 (function(window, $) {
 
-    if(window!==window.top){
+    if(window.opener && window.opener !== window.top){
+        $(window).trigger("auth", getHashParams());
         this.close();
     }
+
+    $(window).on('auth', function(e, params){
+        var state = params.state,
+            storedState = localStorage.getItem(stateKey);
+
+        localStorage.removeItem(stateKey);
+        if (access_token) {
+            $.ajax({
+                url: 'https://api.spotify.com/v1/me',
+                headers: {
+                    'Authorization': 'Bearer ' + access_token
+                },
+                success: function (response) {
+                    userProfilePlaceholder.html(userProfileTemplate(response));
+
+                    $('#login').hide();
+                    $('#loggedin').show();
+
+
+                    // get user's playlists
+                    $.ajax({
+                        url: 'https://api.spotify.com/v1/users/' + user_id + '/playlists',
+                        headers: {
+                            'Authorization': 'Bearer ' + access_token
+                        },
+                        success: function (response) {
+                            playlistsPlaceholder.html(playlistsTemplate(response));
+                        }
+                    });
+
+                }
+            });
+        }
+    });
+
 
     var app_id = 'fa47b31638ea4c86b1d48ad000a3c710';
     var redirect_uri = 'http://yir.github.io/authflow/index.html';
@@ -54,31 +90,31 @@
     } else {
         localStorage.removeItem(stateKey);
         if (access_token) {
-            $.ajax({
-                url: 'https://api.spotify.com/v1/me',
-                headers: {
-                    'Authorization': 'Bearer ' + access_token
-                },
-                success: function(response) {
-                    userProfilePlaceholder.html(userProfileTemplate(response));
-
-                    $('#login').hide();
-                    $('#loggedin').show();
-
-
-                    // get user's playlists
-                    $.ajax({
-                        url: 'https://api.spotify.com/v1/users/'+user_id+'/playlists',
-                        headers: {
-                            'Authorization': 'Bearer ' + access_token
-                        },
-                        success: function(response) {
-                            playlistsPlaceholder.html(playlistsTemplate(response));
-                        }
-                    });
-
-                }
-            });
+//            $.ajax({
+//                url: 'https://api.spotify.com/v1/me',
+//                headers: {
+//                    'Authorization': 'Bearer ' + access_token
+//                },
+//                success: function(response) {
+//                    userProfilePlaceholder.html(userProfileTemplate(response));
+//
+//                    $('#login').hide();
+//                    $('#loggedin').show();
+//
+//
+//                    // get user's playlists
+//                    $.ajax({
+//                        url: 'https://api.spotify.com/v1/users/'+user_id+'/playlists',
+//                        headers: {
+//                            'Authorization': 'Bearer ' + access_token
+//                        },
+//                        success: function(response) {
+//                            playlistsPlaceholder.html(playlistsTemplate(response));
+//                        }
+//                    });
+//
+//                }
+//            });
         } else {
             $('#login').show();
             $('#loggedin').hide();
