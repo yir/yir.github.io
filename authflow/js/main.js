@@ -1,13 +1,15 @@
 (function(window, $) {
 
     if(window.opener && window.opener !== window.top){
-        $.postMessage(JSON.stringify(getHashParams()), location.href, parent);
+        console.log('parent', parent);
+        window.opener.postMessage(JSON.stringify(getHashParams()), location.href, window.opener);
         this.close();
     }
 
-    $.receiveMessage(function(e){
+    window.onmessage = function(e){
         console.log('received message', e.data);
         var params = JSON.parse(e.data),
+            access_token = params.access_token,
             state = params.state,
             storedState = localStorage.getItem(stateKey);
 
@@ -27,7 +29,7 @@
 
                     // get user's playlists
                     $.ajax({
-                        url: 'https://api.spotify.com/v1/users/' + user_id + '/playlists',
+                        url: 'https://api.spotify.com/v1/users/' + response.id + '/playlists',
                         headers: {
                             'Authorization': 'Bearer ' + access_token
                         },
@@ -39,7 +41,7 @@
                 }
             });
         }
-    });
+    };
 
 
     var app_id = 'fa47b31638ea4c86b1d48ad000a3c710';
