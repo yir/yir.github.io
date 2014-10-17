@@ -1,13 +1,14 @@
 (function(window, $) {
 
     if(window.opener && window.opener !== window.top){
-        $(window.opener).trigger("auth", getHashParams());
+        $.postMessage(JSON.stringify(getHashParams()), location.href, parent);
         this.close();
     }
 
-    $(window).on('auth', function(e, params){
-        console.log('auth', params);
-        var state = params.state,
+    $.receiveMessage(function(e){
+        console.log('received message', e.data);
+        var params = JSON.parse(e.data),
+            state = params.state,
             storedState = localStorage.getItem(stateKey);
 
         localStorage.removeItem(stateKey);
