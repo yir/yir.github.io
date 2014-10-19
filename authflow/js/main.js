@@ -1,11 +1,12 @@
 (function(window, $) {
 
+    // if this is the child window, send the token to the parent window
     if(window.opener && window.opener !== window.top){
-        console.log('parent', parent);
         window.opener.postMessage(JSON.stringify(getHashParams()), location.href, window.opener);
         this.close();
     }
 
+    // listen for the token from the child window
     window.onmessage = function(e){
         console.log('received message', e.data);
         var params = JSON.parse(e.data),

@@ -8,3 +8,10 @@
     white-space: nowrap;
     width: 500px;
 }
+
+iframe.follow-widget {
+    border: none;
+    overflow: hidden;
+    height: 24px;
+    width: 92px;
+}
