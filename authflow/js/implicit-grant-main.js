@@ -44,11 +44,7 @@
     // [i think] state key is for "deep-linking" a user
     var stateKey = 'spotify_auth_state';
 
-    var userProfileTemplate = Handlebars.compile($('#user-profile-template').html()),
-        userProfilePlaceholder = $('#user-profile'),
-        playlistsTemplate = Handlebars.compile($('#playlists-template').html()),
-        playlistsPlaceholder = $('#playlists'),
-        params = getHashParams(),
+    var params = getHashParams(),
         access_token = params.access_token,
         state = params.state,
         storedState = localStorage.getItem(stateKey);
