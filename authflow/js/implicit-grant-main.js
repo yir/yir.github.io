@@ -41,8 +41,7 @@
                 },
                 error: function (jqxhr, status, err) {
                     var errbox = $('<div class="alert alert-danger" role="alert"></div>').appendTo($('#login')).html(
-                        'Could not retrieve data, check browser console for more details.<br>'+
-                        '(Cross-origin isn\'t enabled for <b>www</b>.spotify.com, but it is for <b>api</b>.spotify.com.)'
+                        'Error accessing API endpoint. Check <b>browser console</b> for more details.'
                     );
                     setTimeout(function(){
                         errbox.fadeOut('slow', function(){ errbox.remove(); });
