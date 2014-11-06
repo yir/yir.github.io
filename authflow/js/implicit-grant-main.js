@@ -31,9 +31,11 @@
                     $('#loggedin').show();
                     
                     // start image test
-                    var iframe = $('<iframe frameborder=no scrolling=no>').css({width:1200,height:630,border:0});
-                    $('#loggedin').append(iframe);
-                    iframe.attr('src', '/card-image/' + response.id + '/' + access_token);
+                    if(!location.hostname.match(/github/)){
+                        var iframe = $('<iframe frameborder=no scrolling=no>').css({width:1200,height:630,border:0});
+                        $('#loggedin').append(iframe);
+                        iframe.attr('src', '/card-image/' + response.id + '/' + access_token);
+                    }
                     // end image test
 
                 },
