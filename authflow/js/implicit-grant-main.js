@@ -25,7 +25,7 @@
                 },
                 success: function (response) {
                     
-                    $('<pre></pre>').appendTo($('loggedin')).text(JSON.stringify(response));
+                    $('<pre></pre>').appendTo($('#loggedin')).text(JSON.stringify(response));
 
                     $('#login').hide();
                     $('#loggedin').show();
