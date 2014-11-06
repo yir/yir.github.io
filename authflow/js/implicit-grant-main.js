@@ -87,14 +87,13 @@
             $('#loggedin').hide();
         }
         
-        $('#use-new-api')
-            .attr('checked', localStorage.getItem('use-new-api'))
-            .on('click', function() {
-                setTimeout(function(){
-                    localStorage.setItem('use-new-api', this.checked.toString());
-                }, 50);
-            });
-        ///
+        $('#use-new-api')[0].checked = localStorage.getItem('use-new-api') === 'true';
+        $('#use-new-api').on('click', function() {
+            setTimeout(function(){
+                localStorage.setItem('use-new-api', this.checked.toString());
+            }, 50);
+        });
+
 
         $('#login-button').on('click', function() {
 
