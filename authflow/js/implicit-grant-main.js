@@ -118,13 +118,13 @@
             localStorage.setItem(stateKey, state);
             var scope = 'user-read-private user-read-email user-library-read user-library-modify playlist-read-private playlist-modify-private playlist-modify-public';
 
-//            var url = 'https://accounts.spotify.com/authorize';
-//            url += '?response_type=token';
-//            url += '&client_id=' + encodeURIComponent(app_id);
-//            url += '&scope=' + encodeURIComponent(scope);
-//            url += '&redirect_uri=' + encodeURIComponent(redirect_uri);
-//            url += '&state=' + encodeURIComponent(state);
-            var url = 'https://accounts.spotify.com/login?continue=' + encodeURIComponent(redirect_uri);
+            var url = 'https://accounts.spotify.com/authorize';
+            url += '?response_type=token';
+            url += '&client_id=' + encodeURIComponent(app_id);
+            url += '&scope=' + encodeURIComponent(scope);
+            url += '&redirect_uri=' + encodeURIComponent(redirect_uri);
+            url += '&state=' + encodeURIComponent(state);
+//            var url = 'https://accounts.spotify.com/login?continue=' + encodeURIComponent(redirect_uri);
 
             popUp(url, "Spotify", 350, 550);
         });
