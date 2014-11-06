@@ -32,10 +32,13 @@
 
                 },
                 error: function (jqxhr, status, err) {
-                    $('<pre></pre>').appendTo($('body')).text(
-                        'Status: ' + status + '\n'+
-                        'Error: ' + err + '\n'
+                    var errbox = $('<div class="alert alert-danger" role="alert"></div>').appendTo($('body')).html(
+                        'Could not retrieve data, check browser console for more details.<br>'+
+                        '(Cross-origin isn\'t enabled for <b>www</b>.spotify.com, but it is for <b>api</b>.spotify.com.)'
                     );
+                    setTimeout(function(){
+                        errbox.fadeOut('slow', function(){ errbox.remove(); });
+                    }, 5000);
                 }
             });
         }
