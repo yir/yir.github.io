@@ -90,7 +90,9 @@
         $('#use-new-api')
             .attr('checked', localStorage.getItem('use-new-api'))
             .on('click', function() {
-                localStorage.setItem('use-new-api', this.checked.toString());
+                setTimeout(function(){
+                    localStorage.setItem('use-new-api', this.checked.toString());
+                }, 50);
             });
         ///
 
