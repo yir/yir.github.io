@@ -1,83 +1,26 @@
 <!doctype html>
 <html>
 <head>
-    <title>Spotify Implicit Grant Flow</title>
+    <title>Spotify - Year in Music</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/styles.css">
+    <style> #login, #loggedin { display: none; } </style>
 </head>
 <body>
 
 <div class="container">
     <div id="login">
         <h1>This is an example of the Implicit Grant flow</h1>
-        <button id="login-button" class="btn btn-primary">Log in with Spotify</button>
+        <button id="login-button" class="btn btn-primary">Show me my data</button>
     </div>
-    <div id="loggedin">
-        <div id="user-profile">
-        </div>
-        <div id="oauth">
-        </div>
-        <div id="playlists">
-        </div>
-    </div>
-    
-
-    <!-- follow widget -->
-    <iframe class="follow-widget" frameborder="0" scrolling="no" src="https://embed.spotify.com/follow/1/?uri=spotify:artist:1vCWHaC5f2uS3yhpwWbIA6&size=basic&theme=dark&show-count=0"></iframe>
-
-
+    <div id="loggedin"></div>
 </div>
 <br>
 <br>
 
-<!-- templates -->
-<script id="user-profile-template" type="text/x-handlebars-template">
-    <h1>Logged in as {{display_name}}</h1>
-    <div class="media">
-        <div class="pull-left">
-            <img class="media-object" width="150" src="{{images.0.url}}" />
-        </div>
-        <div class="media-body">
-            <dl class="dl-horizontal">
-                <dt>Display name</dt><dd class="clearfix">{{display_name}}</dd>
-                <dt>Id</dt><dd>{{id}}</dd>
-                <dt>Email</dt><dd>{{email}}</dd>
-                <dt>Spotify URI</dt><dd><a href="{{external_urls.spotify}}">{{external_urls.spotify}}</a></dd>
-                <dt>Link</dt><dd><a href="{{href}}">{{href}}</a></dd>
-                <dt>Profile Image</dt><dd class="clearfix"><a href="{{images.0.url}}">{{images.0.url}}</a></dd>
-                <dt>Country</dt><dd>{{country}}</dd>
-            </dl>
-        </div>
-    </div>
-</script>
-
-    
-<script id="oauth-template" type="text/x-handlebars-template">
-    <h2>oAuth info</h2>
-    <dl class="dl-horizontal">
-        <dt>Access token</dt><dd class="text-overflow">{{access_token}}</dd>
-    </dl>
-</script>
-
-
-<script id="playlists-template" type="text/x-handlebars-template">
-    <h1>Playlists</h1>
-    {{#each items}}
-    <div class="user-playlist" style="overflow:hidden">
-        <img src="{{images.0.url}}" style="float:left;margin:0 20px 0 0;">
-        <h4>{{name}}</h4>
-        <div>Public? {{public}}</div>
-        <div>Collaborative? {{collaborative}}</div>
-        <div>{{tracks.total}} tracks <br><br></div>
-    </div>
-    {{/each}}
-</script>
-
 
 <!-- js -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script src="./js/main.js"></script>
+<script src="./js/implicit-grant-main.js"></script>
 
 </body>
 </html>
