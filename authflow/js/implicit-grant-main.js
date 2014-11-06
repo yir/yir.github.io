@@ -30,6 +30,12 @@
                     $('#login').hide();
                     $('#loggedin').show();
 
+                },
+                error: function (jqxhr, status, err) {
+                    $('<pre></pre>').appendTo($('body')).text(
+                        'Status: ' + status + '\n'+
+                        'Error: ' + err + '\n'
+                    );
                 }
             });
         }
