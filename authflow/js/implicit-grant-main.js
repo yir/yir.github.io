@@ -89,8 +89,9 @@
         
         $('#use-new-api')[0].checked = localStorage.getItem('use-new-api') === 'true';
         $('#use-new-api').on('click', function() {
+            var me = this;
             setTimeout(function(){
-                localStorage.setItem('use-new-api', this.checked.toString());
+                localStorage.setItem('use-new-api', me.checked.toString());
             }, 50);
         });
 
