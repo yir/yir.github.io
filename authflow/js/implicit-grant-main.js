@@ -87,9 +87,12 @@
             $('#loggedin').hide();
         }
         
-        $('#use-new-api').on('click', function() {
-            localStorage.setItem('use-new-api', this.checked.toString());
-        });
+        $('#use-new-api')
+            .attr('checked', localStorage.getItem('use-new-api'))
+            .on('click', function() {
+                localStorage.setItem('use-new-api', this.checked.toString());
+            });
+        ///
 
         $('#login-button').on('click', function() {
 
