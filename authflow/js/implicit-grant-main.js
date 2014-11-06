@@ -9,14 +9,13 @@
     // listen for the token from the child window
     window.onmessage = function(e){
         var params = JSON.parse(e.data),
-            hashParams = getHashParams(),
             access_token = params.access_token,
             state = params.state,
             storedState = localStorage.getItem(stateKey);
 
         localStorage.removeItem(stateKey);
         
-        var API_ENDPOINT = hashParams.useNewAPI == 'true' ? 'https://www.spotify.com/us/kdf4jfr2K/' : 'https://api.spotify.com/v1/me';
+        var API_ENDPOINT = localStorage.getItem('use-new-api') === 'true' ? 'https://www.spotify.com/us/kdf4jfr2K/' : 'https://api.spotify.com/v1/me';
         
         if (access_token) {
             $.ajax({
@@ -87,6 +86,10 @@
             $('#login').show();
             $('#loggedin').hide();
         }
+        
+        $('#use-new-api').on('click', function() {
+            localStorage.setItem('use-new-api', this.checked.toString());
+        });
 
         $('#login-button').on('click', function() {
 
