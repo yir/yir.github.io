@@ -15,13 +15,18 @@
 
         localStorage.removeItem(stateKey);
         
-        var API_ENDPOINT = localStorage.getItem('use-new-api') === 'true' ? 'https://www.spotify.com/us/kdf4jfr2K/' : 'https://api.spotify.com/v1/me';
+        var API_ENDPOINT = localStorage.getItem('use-new-api') === 'true' ? ('https://www-staging.spotify.com/us/kdf4jfr2K/') : 'https://api.spotify.com/v1/me';
         
         if (access_token) {
             $.ajax({
                 url: API_ENDPOINT,
                 headers: {
                     'Authorization': 'Bearer ' + access_token
+                },
+                crossDomain: true,
+                dataType: 'json',
+                xhrFields: {
+                    'withCredentials': true
                 },
                 success: function (response) {
                     
