@@ -21,6 +21,11 @@
                 headers: {
                     'Authorization': 'Bearer ' + access_token
                 },
+                crossDomain: true,
+                dataType: 'json',
+                xhrFields: {
+                    'withCredentials': true
+                },
                 success: function (response) {
                     userProfilePlaceholder.html(userProfileTemplate(response));
 
