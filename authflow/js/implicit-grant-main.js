@@ -122,6 +122,7 @@
                 localStorage.setItem('use-new-api', me.checked.toString());
                 if(!me.checked){
                     localStorage.setItem('use-staging', '');
+                    $('#use-staging')[0].checked = false;
                 }
                 $('#use-staging')[0].disabled = !me.checked;
             }, 50);
