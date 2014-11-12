@@ -27,9 +27,10 @@
         if (access_token) {
             $.ajax({
                 url: API_ENDPOINT,
-                headers: {
-                    'Authorization': 'Bearer ' + access_token
-                },
+                // Wells says that this is extraneous. .. . but the public API requires it.
+//                headers: {
+//                    'Authorization': 'Bearer ' + access_token
+//                },
                 crossDomain: true,
                 dataType: 'json',
                 xhrFields: {
