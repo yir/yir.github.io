@@ -15,7 +15,14 @@
 
         localStorage.removeItem(stateKey);
         
-        var API_ENDPOINT = localStorage.getItem('use-new-api') === 'true' ? ('https://www-staging.spotify.com/us/kdf4jfr2K/') : 'https://api.spotify.com/v1/me';
+        var API_ENDPOINT = 'https://api.spotify.com/v1/me';
+        if(localStorage.getItem('use-new-api') === 'true'){
+            if(localStorage.getItem('use-staging') === 'true'){
+                API_ENDPOINT = 'https://www-staging.spotify.com/us/kdf4jfr2K/';
+            } else {
+                API_ENDPOINT = 'https://www.spotify.com/us/kdf4jfr2K/';
+            }
+        }
         
         if (access_token) {
             $.ajax({
@@ -26,7 +33,7 @@
                 crossDomain: true,
                 dataType: 'json',
                 xhrFields: {
-                    'withCredentials': true
+                    withCredentials: true
                 },
                 success: function (response) {
                     
@@ -113,9 +120,21 @@
             var me = this;
             setTimeout(function(){
                 localStorage.setItem('use-new-api', me.checked.toString());
+                if(!me.checked){
+                    localStorage.setItem('use-staging', '');
+                }
+                $('#use-staging')[0].disabled = !me.checked;
             }, 50);
         });
 
+        $('#use-staging')[0].disabled = localStorage.getItem('use-new-api') !== 'true';
+        $('#use-staging')[0].checked = localStorage.getItem('use-staging') === 'true';
+        $('#use-staging').on('click', function() {
+            var me = this;
+            setTimeout(function(){
+                localStorage.setItem('use-staging', me.checked.toString());
+            }, 50);
+        });
 
         $('#login-button').on('click', function() {
 
