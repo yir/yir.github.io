@@ -1,5 +1,7 @@
 (function(window, $) {
 
+    // adding this comment to see if github will republish the site.
+
     // if this is the child window, send the token to the parent window
     if(window.opener && window.opener !== window.top){
         window.opener.postMessage(JSON.stringify(getHashParams()), location.href, window.opener);
